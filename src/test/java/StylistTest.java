@@ -94,9 +94,9 @@ public class StylistTest{
   @Test
   public void getClients_returnsAllClientsOfStylist_true(){
     testStylist.save();
-    Client testClient = new Client("Testy McTest", testStylist.getId());
+    Client testClient = new Client("Testy McTest", testStylist.getId(), "555-5555", "test@test.com");
     testClient.save();
-    Client testClient2 = new Client("Testina McTest", testStylist.getId());
+    Client testClient2 = new Client("Testina McTest", testStylist.getId(), "655-5555", "testina@test.com");
     testClient2.save();
     Client[] clients = new Client[] {testClient, testClient2};
     assertTrue(testStylist.getClients().containsAll(Arrays.asList(clients)));

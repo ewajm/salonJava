@@ -7,7 +7,7 @@
 #if($clients.size() > 0)
   #foreach($client in $clients)
     <div class="client">
-      <a href="clients/$client.getId()">$client.getName()</a>
+      <a href="stylists/$client.getStylistId()/clients/$client.getId()">$client.getName()</a>
     </div>
   #end
 #else
@@ -15,5 +15,5 @@
 #end
 </div>
 
-<a href="/clients/new">Add new hire</a><br>
+<a href="/clients/new">Add new client</a><br>
 <a href="/">Back to home</a>

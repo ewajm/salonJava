@@ -11,7 +11,7 @@ public class ClientTest{
 
   @Before
   public void setUp(){
-    testClient = new Client("Testy McTest", 1);
+    testClient = new Client("Testy McTest", 1, "555-5555", "testy@testy.com");
   }
 
   @Test
@@ -26,8 +26,18 @@ public class ClientTest{
   }
 
   @Test
+  public void getPhone_returnsPhoneSetByConstructor_String() {
+    assertEquals("555-5555", testClient.getPhone());
+  }
+
+  @Test
+  public void getEmail_returnsEmailSetByConstructor_String() {
+    assertEquals("testy@testy.com", testClient.getEmail());
+  }
+
+  @Test
   public void equals_returnsTrueWhenPropertiesAreTheSame_true() {
-    Client testClient2 = new Client("Testy McTest", 1);
+    Client testClient2 = new Client("Testy McTest", 1, "555-5555", "testy@testy.com");
     assertTrue(testClient.equals(testClient2));
   }
 
@@ -50,7 +60,7 @@ public class ClientTest{
 
   @Test
   public void all_returnsAllInstancesOfclass_true(){
-    Client testClient2 = new Client("Testina McTest", 1);
+    Client testClient2 = new Client("Testina McTest", 1,"555-5556", "testina@testy.com");
     testClient2.save();
     testClient.save();
     assertTrue(Client.all().contains(testClient));
@@ -59,7 +69,7 @@ public class ClientTest{
 
   @Test
   public void find_returnsClientWithMatchingId_true(){
-    Client testClient2 = new Client("Testina McTest", 1);
+    Client testClient2 = new Client("Testina McTest", 1, "555-5556", "testina@testy.com");
     testClient2.save();
     testClient.save();
     assertEquals(Client.find(testClient2.getId()), testClient2);
