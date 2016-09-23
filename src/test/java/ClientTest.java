@@ -11,7 +11,7 @@ public class ClientTest{
 
   @Before
   public void setUp(){
-    testClient = new Client("Testy McTest");
+    testClient = new Client("Testy McTest", 1);
   }
 
   @Test
@@ -27,7 +27,7 @@ public class ClientTest{
 
   @Test
   public void equals_returnsTrueWhenPropertiesAreTheSame_true() {
-    Client testClient2 = new Client("Testy McTest");
+    Client testClient2 = new Client("Testy McTest", 1);
     assertTrue(testClient.equals(testClient2));
   }
 
@@ -50,7 +50,7 @@ public class ClientTest{
 
   @Test
   public void all_returnsAllInstancesOfclass_true(){
-    Client testClient2 = new Client("Testina McTest");
+    Client testClient2 = new Client("Testina McTest", 1);
     testClient2.save();
     testClient.save();
     assertTrue(Client.all().contains(testClient));
@@ -59,9 +59,14 @@ public class ClientTest{
 
   @Test
   public void find_returnsClientWithMatchingId_true(){
-    Client testClient2 = new Client("Testina McTest");
+    Client testClient2 = new Client("Testina McTest", 1);
     testClient2.save();
     testClient.save();
     assertEquals(Client.find(testClient2.getId()), testClient2);
+  }
+
+  @Test
+  public void getStylistId_returnsStylistId_int(){
+    assertEquals(1, testClient.getStylistId());
   }
 }

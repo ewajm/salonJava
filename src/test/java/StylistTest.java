@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 import org.sql2o.*;
 
 public class StylistTest{
@@ -88,5 +89,16 @@ public class StylistTest{
     testStylist2.save();
     testStylist.save();
     assertEquals(Stylist.find(testStylist2.getId()), testStylist2);
+  }
+
+  @Test
+  public void getClients_returnsAllClientsOfStylist_true(){
+    testStylist.save();
+    Client testClient = new Client("Testy McTest", testStylist.getId());
+    testClient.save();
+    Client testClient2 = new Client("Testina McTest", testStylist.getId());
+    testClient2.save();
+    Client[] clients = new Client[] {testClient, testClient2};
+    assertTrue(testStylist.getClients().containsAll(Arrays.asList(clients)));
   }
 }
