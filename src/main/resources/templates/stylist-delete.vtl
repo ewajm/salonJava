@@ -1,0 +1,20 @@
+<h2>Before deleting $toDelete.getName(), please reassign their clients</h2>
+
+<form action="/stylists/$toDelete.getId()/delete" method="post">
+  #foreach($client in $toDelete.getClients())
+    <div class="form-group">
+      <label for name="$client.getId()">$client.getName()</label>
+      <select name="$client.getId()">
+        #foreach($stylist in $stylists)
+          #if($stylist.getId() != $toDelete.getId())
+          <option value="$stylist.getId()">$stylist.getName()</option>
+          #end
+        #end
+      </select>
+    </div>
+  #end
+  <button type="submit">Delete $toDelete.getName()</button>
+</form>
+
+<a href="/stylists/toDelete.getId()">Back to $toDelete.getName()</a><br>
+<a href="/stylists">Back to all stylists</a>

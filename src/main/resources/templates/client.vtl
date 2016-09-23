@@ -5,10 +5,13 @@
 <p>Phone: $client.getPhone()</p>
 #end
 #if($client.getEmail().length() > 0)
-<p>Email: </p>
+<p>Email: $client.getEmail()</p>
 #end
 
-<a href= "#">Update stylist/details</a><br>
-<a class="btn btn-danger" href="clients/delete">Delete client</a><br>
+<a href= "#" class="btn btn-success">Update stylist/details</a><br>
+<form action="/stylists/$stylist.getId()/clients/delete" method="post">
+  <input type = "hidden" name="client_id" value = "$client.getId()">
+  <button type = "submit" class="btn btn-danger">Delete client</button>
+</form>
 <a href="/stylists/$stylist.getId()">Back to stylist's page</a><br>
 <a href="/clients">Back to clients</a>
