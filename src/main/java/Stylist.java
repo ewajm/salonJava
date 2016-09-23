@@ -43,4 +43,26 @@ public class Stylist{
   public void toggleAccepting(){
     accepting_clients = !accepting_clients;
   }
+
+  @Override
+  public boolean equals(Object toCompare){
+    if(!(toCompare instanceof Stylist)){
+      return false;
+    } else {
+      Stylist stylistCompare = (Stylist) toCompare;
+      return this.name.equals(stylistCompare.name) && this.specialty.equals(stylistCompare.specialty) && this.experience == stylistCompare.experience && this.hours.equals(stylistCompare.hours) && this.accepting_clients == stylistCompare.accepting_clients;
+    }
+  }
+
+  public void save(){
+    String sql = "INSERT INTO stylists (name, specialty, experience, accepting_clients, hours) VALUES (:name, :specialty, :experience, :accepting_clients, :hours)";
+    try(Connection con = DB.sql2o.open()){
+      this.id = (int) con.createQuery(sql, true).addParameter("name", this.name)
+      .addParameter("specialty", this.specialty)
+      .addParameter("experience", this.experience)
+      .addParameter("accepting_clients", this.accepting_clients)
+      .addParameter("hours", this.hours)
+      .executeUpdate().getKey();
+    }
+  }
 }

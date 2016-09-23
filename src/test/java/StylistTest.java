@@ -38,4 +38,32 @@ public class StylistTest{
   public void getExperience_returnsExperienceSetByConstructor_int() {
     assertEquals(1, testStylist.getExperience());
   }
+
+  @Test
+  public void isAcceptingClients_returnsAcceptingClientsSetByConstructor_boolean() {
+    assertEquals(true, testStylist.isAcceptingClients());
+  }
+
+  @Test
+  public void isAcceptingClients_returnsNewValueWhenToggled_boolean() {
+    testStylist.toggleAccepting();
+    assertEquals(false, testStylist.isAcceptingClients());
+  }
+
+  @Test
+  public void equals_returnsTrueWhenPropertiesAreTheSame_true() {
+    Stylist testStylist2 = new Stylist("Styles McTesty", "Some hair thing", 1, "MTh 1pm-5pm");
+    assertTrue(testStylist.equals(testStylist2));
+  }
+
+  @Test
+  public void save_savesToDatabase_true() {
+    testStylist.save();
+    Stylist testStylist2 = null;
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM stylists WHERE name = 'Styles McTesty'";
+      testStylist2 = con.createQuery(sql).executeAndFetchFirst(Stylist.class);
+    }
+    assertTrue(testStylist.equals(testStylist2));
+  }
 }
