@@ -42,6 +42,24 @@ public class Stylist{
 
   public void toggleAccepting(){
     accepting_clients = !accepting_clients;
+    String sql = "UPDATE stylists SET accepting_clients=:accepting_clients WHERE id=:id";
+    try(Connection con = DB.sql2o.open()){
+      con.createQuery(sql).addParameter("accepting_clients", accepting_clients).addParameter("id", id).executeUpdate();
+    }
+  }
+
+  public void update(String propertyName, String propertyValue){
+    String sql = "UPDATE stylists SET " + propertyName + "=:value WHERE id=:id";
+    if(propertyName.equals("experience")){
+      int newExp = Integer.parseInt(propertyValue);
+      try(Connection con = DB.sql2o.open()){
+        con.createQuery(sql).addParameter("value", newExp).addParameter("id", id).executeUpdate();
+      }
+    } else {
+      try(Connection con = DB.sql2o.open()){
+        con.createQuery(sql).addParameter("value", propertyValue).addParameter("id", id).executeUpdate();
+      }
+    }
   }
 
   @Override
@@ -74,6 +92,13 @@ public class Stylist{
     String sql = "SELECT id, name, stylist_id, phone, email FROM clients WHERE stylist_id=:id";
     try(Connection con = DB.sql2o.open()){
       return con.createQuery(sql).addParameter("id", id).executeAndFetch(Client.class);
+    }
+  }
+
+  public void delete(){
+    String sql = "DELETE FROM stylists WHERE id=:id";
+    try(Connection con = DB.sql2o.open()){
+      con.createQuery(sql).addParameter("id", id).executeUpdate();
     }
   }
 

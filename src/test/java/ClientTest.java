@@ -79,4 +79,20 @@ public class ClientTest{
   public void getStylistId_returnsStylistId_int(){
     assertEquals(1, testClient.getStylistId());
   }
+
+  @Test
+  public void delete_deletesFromTable_true(){
+    testClient.save();
+    testClient.delete();
+    assertEquals(null, Client.find(testClient.getId()));
+  }
+
+  @Test
+  public void update_updatesPassedInProperty_true(){
+    testClient.save();
+    testClient.update("phone", "666-6666");
+    testClient.update("stylist_id", "3");
+    assertEquals("666-6666", Client.find(testClient.getId()).getPhone());
+    assertEquals(3, Client.find(testClient.getId()).getStylistId());
+  }
 }

@@ -5,6 +5,14 @@
     <label for="client-name">Client's name</label>
     <input type="text" name="client-name" required class="form-control">
   </div>
+  <div class="form-group">
+    <label for="client-phone">Client's phone</label>
+    <input type="tel" name="client-phone" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="client-email">Client's email</label>
+    <input type="email" name="client-email" class="form-control">
+  </div>
   #if($stylist)
     <input type="hidden" name="stylist_id" value="$stylist">
   #else

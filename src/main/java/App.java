@@ -67,7 +67,9 @@ public class App {
     post("/stylists/:id", (request, response) -> {
       String name = request.queryParams("client-name");
       int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
-      Client client = new Client(name, stylistId, "", "");
+      String email = request.queryParams("client-email");
+      String phone = request.queryParams("client-phone");
+      Client client = new Client(name, stylistId, email, phone);
       client.save();
       String url = "/stylists/" + stylistId;
       response.redirect(url);
@@ -84,7 +86,9 @@ public class App {
     post("/clients", (request, response) -> {
       String name = request.queryParams("client-name");
       int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
-      Client client = new Client(name, stylistId, "", "");
+      String email = request.queryParams("client-email");
+      String phone = request.queryParams("client-phone");
+      Client client = new Client(name, stylistId, email, phone);
       client.save();
       response.redirect("/clients");
       return null;

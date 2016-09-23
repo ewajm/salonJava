@@ -62,6 +62,27 @@ public class Client {
     }
   }
 
+  public void delete(){
+    String sql = "DELETE FROM clients WHERE id=:id";
+    try(Connection con = DB.sql2o.open()){
+      con.createQuery(sql).addParameter("id", id).executeUpdate();
+    }
+  }
+
+  public void update(String propertyName, String propertyValue){
+    String sql = "UPDATE clients SET " + propertyName + "=:value WHERE id=:id";
+    if(propertyName.equals("stylist_id")){
+      int newId = Integer.parseInt(propertyValue);
+      try(Connection con = DB.sql2o.open()){
+        con.createQuery(sql).addParameter("value", newId).addParameter("id", id).executeUpdate();
+      }
+    } else {
+      try(Connection con = DB.sql2o.open()){
+        con.createQuery(sql).addParameter("value", propertyValue).addParameter("id", id).executeUpdate();
+      }
+    }
+  }
+
   public static List<Client> all(){
     String sql = "SELECT id, name, stylist_id, email, phone FROM clients";
     try(Connection con = DB.sql2o.open()){

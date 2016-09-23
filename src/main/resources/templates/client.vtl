@@ -1,11 +1,14 @@
 <h1>$client.getName()</h1>
 
 <h3>Stylist: $stylist.getName()</h3>
-<p>Phone: </p>
+#if($client.getPhone().length() > 0)
+<p>Phone: $client.getPhone()</p>
+#end
+#if($client.getEmail().length() > 0)
 <p>Email: </p>
+#end
 
-<a href= "#">Update stylist/details</a>
-<a href="#">Delete client</a>
-
+<a href= "#">Update stylist/details</a><br>
+<a class="btn btn-danger" href="clients/delete">Delete client</a><br>
 <a href="/stylists/$stylist.getId()">Back to stylist's page</a><br>
 <a href="/clients">Back to clients</a>
