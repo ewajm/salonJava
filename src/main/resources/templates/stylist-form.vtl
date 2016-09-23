@@ -70,9 +70,10 @@
   <button type="submit" class="btn btn-primary btn-lg">Add Stylist</button>
   #end
 </form>
-
+<div class="link">
 #if($toUpdate)
 <a href="/stylists/$toUpdate.getId()">back to $toUpdate.getName()</a>
 #end
-<a href="/stylists">back to stylists</a><br>
+<a href="/stylists">back to stylists</a>
 <a href="/">back to index</a>
+<div>

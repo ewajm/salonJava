@@ -1,21 +1,71 @@
 body {
-  background-color: #0a0908;
+  background-color: #5e503f;
   color: #22333b;
   font-family: 'David Libre', serif;
 }
 
 .container {
   border: 2px solid #22333b;
-  border-radius: 5px;
   background-color: #a9927d;
 }
 
 h1 {
-  text-align: center;
   font-family: 'Righteous', cursive;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+p, li {
+  font-size: large;
+  font-weight: bold;
+}
+
+div {
+  text-align: center;
+}
+
+div.col-sm-4 h1{
+  background-color: #f2f4f3;
+  border: 2px solid #22333b;
+}
+
+div.link, div.stylist, div.client {
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f2f4f3;
+  border: 2px solid #22333b;
+}
+
+div.stylist a, div.client a{
+  font-size: x-large;
+  font-family: 'Righteous', cursive;
+}
+
+.link a{
+  font-size: large;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 form {
   width: 60%;
   margin: 2rem auto;
+  background-color: #f2f4f3;
+  padding: 1rem;
+  border: 2px solid #22333b;
+  font-weight: bold;
+  font-size: large;
+}
+
+ul {
+  text-align: left;
+  width: 40%;
+  margin: 0 auto;
+}
+
+a {
+  color: darkslateblue;
 }

@@ -6,18 +6,20 @@
 <p>Currently accepting new clients: $stylist.isAcceptingClients()</p>
 
 #if($stylist.getClients().size() > 0)
-  <h4>Client list</h4>
-  <ul>
+  <p>Client list</p>
   #foreach($client in $stylist.getClients())
-    <li><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
+<p><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></p>
   #end
-  </ul>
 #else
 <h3>No clients yet!</h3>
 #end
+<div class="link">
+<a class="btn btn-success" href="/stylists/$stylist.getId()/update">Update $stylist.getName()'s details</a>
+<a class="btn btn-danger" href="/stylists/$stylist.getId()/delete">Delete Stylist</a>
+</div>
+<div class="link">
 #if($stylist.isAcceptingClients())
-<h3><a href="/stylists/$stylist.getId()/clients/new">Add client</a></h3>
+<a href="/stylists/$stylist.getId()/clients/new">Add client</a>
 #end
-<h3><a href="/stylists/$stylist.getId()/update">Update $stylist.getName()'s details</a>
-<h3><a class="btn btn-danger" href="/stylists/$stylist.getId()/delete">Delete Stylist</a></h3>
-<h3><a href="/stylists">Back to all stylists</a></h3>
+<a href="/stylists">Back to all stylists</a>
+</div>

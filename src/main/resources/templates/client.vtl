@@ -7,11 +7,12 @@
 #if($client.getEmail().length() > 0)
 <p>Email: $client.getEmail()</p>
 #end
-
-<a href= "/stylists/$stylist.getId()/clients/$client.getId()/update" class="btn btn-success">Update stylist/details</a><br>
 <form action="/stylists/$stylist.getId()/clients/delete" method="post">
   <input type = "hidden" name="client_id" value = "$client.getId()">
   <button type = "submit" class="btn btn-danger">Delete client</button>
+  <a href= "/stylists/$stylist.getId()/clients/$client.getId()/update" class="btn btn-success">Update stylist/details</a>
 </form>
-<a href="/stylists/$stylist.getId()">Back to stylist's page</a><br>
+<div class="link">
+<a href="/stylists/$stylist.getId()">Back to stylist's page</a>
 <a href="/clients">Back to clients</a>
+</div>
