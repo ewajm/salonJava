@@ -2,7 +2,7 @@ import org.sql2o.*;
 import java.util.List;
 import java.util.ArrayList;
 
-//abstract specialties to it's own class/table of offered specialties?
+//TODO: abstract specialties to it's own class/table of offered specialties?
 
 public class Stylist{
   private int id;
@@ -63,6 +63,24 @@ public class Stylist{
       .addParameter("accepting_clients", this.accepting_clients)
       .addParameter("hours", this.hours)
       .executeUpdate().getKey();
+    }
+  }
+
+  public int getId(){
+    return id;
+  }
+
+  public static List<Stylist> all(){
+    String sql = "SELECT id, name, specialty, experience, accepting_clients, hours FROM stylists";
+    try(Connection con = DB.sql2o.open()){
+      return con.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
+
+  public static Stylist find(int id){
+    String sql = "SELECT id, name, specialty, experience, accepting_clients, hours FROM stylists WHERE id=:id";
+    try(Connection con = DB.sql2o.open()){
+      return con.createQuery(sql).addParameter("id", id).executeAndFetchFirst(Stylist.class);
     }
   }
 }

@@ -66,4 +66,27 @@ public class StylistTest{
     }
     assertTrue(testStylist.equals(testStylist2));
   }
+
+  @Test
+  public void getId_returnsIdSetBySave_String() {
+    testStylist.save();
+    assertTrue(testStylist.getId() > 0);
+  }
+
+  @Test
+  public void all_returnsAllInstancesOfclass_true(){
+    Stylist testStylist2 = new Stylist("Testy McStyles", "Some other hair thing", 2, "TF 8am-12pm");
+    testStylist2.save();
+    testStylist.save();
+    assertTrue(Stylist.all().contains(testStylist));
+    assertTrue(Stylist.all().contains(testStylist2));
+  }
+
+  @Test
+  public void find_returnsStylistWithMatchingId_true(){
+    Stylist testStylist2 = new Stylist("Testy McStyles", "Some other hair thing", 2, "TF 8am-12pm");
+    testStylist2.save();
+    testStylist.save();
+    assertEquals(Stylist.find(testStylist2.getId()), testStylist2);
+  }
 }
