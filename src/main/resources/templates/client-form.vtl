@@ -1,17 +1,31 @@
-<h1>Add new client</h1>
+#if($toUpdate)
+  <h1>Update $toUpdate.getName()'s Details</h1>
+  <h3>Current details: </h3>
+  <ul>
+    <li>Current Stylist: $currentStylist.getName()</li>
+    #if($toUpdate.getPhone().length() > 0)
+    <li>Phone: $toUpdate.getPhone()</li>
+    #end
+    #if($toUpdate.getEmail().length() > 0)
+    <li>Email: $toUpdate.getEmail()</li>
+    #end
+  </ul>
+#else
+  <h1>Add new client</h1>
+#end
 
 <form action="$post-url" method="post">
   <div class="form-group">
-    <label for="client-name">Client's name</label>
-    <input type="text" name="client-name" required class="form-control">
+    <label for="name">Client's name</label>
+    <input type="text" name="name" #if(!$toUpdate)required#end class="form-control">
   </div>
   <div class="form-group">
-    <label for="client-phone">Client's phone</label>
-    <input type="tel" name="client-phone" class="form-control">
+    <label for="phone">Client's phone</label>
+    <input type="tel" name="phone" class="form-control">
   </div>
   <div class="form-group">
-    <label for="client-email">Client's email</label>
-    <input type="email" name="client-email" class="form-control">
+    <label for="email">Client's email</label>
+    <input type="email" name="email" class="form-control">
   </div>
   #if($stylist)
     <input type="hidden" name="stylist_id" value="$stylist">
@@ -19,10 +33,26 @@
     <div class="form-group">
       <select name="stylist_id">
         #foreach($stylist in $stylists)
-          <option value="$stylist.getId()">$stylist.getName()</option>
+          <option value="$stylist.getId()"
+            #if($currentStylist)
+            #if($currentStylist.getId() == $stylist.getId())selected="selected"#end#end>
+            $stylist.getName()
+          </option>
         #end
       </select>
     </div>
   #end
-<button type="submit" class="btn btn-primary" name="button">Add Client</button>
+  #if($toUpdate)
+  <button type="submit" class="btn btn-primary btn-lg">Update $toUpdate.getName()</button>
+  #else
+  <button type="submit" class="btn btn-primary btn-lg">Add Client</button>
+  #end
 </form>
+
+#if($toUpdate)
+<a href= "/stylists/$currentStylist.getId()/clients/$toUpdate.getId()">Back to $toUpdate.getName()</a><br>
+#end
+#if($stylist)
+<a href="/stylists/$stylist.getId()">Back to $stylist.getName()</a>
+#end
+<a href="/clients">Back to clients</a>

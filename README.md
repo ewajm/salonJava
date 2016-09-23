@@ -13,7 +13,7 @@ _A Hair Salon App with pages for employee and client management, built using Jav
 * _Use the following commands in psql to create the postgres database or just create the hair_salon database and run 'psql hair_salon < hair\_salon.sql'_
  * CREATE DATABASE hair_salon
  * CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, specialty varchar, accepting_clients boolean, experience int, hours varchar);
- * CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int);
+ * CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int,  phone varchar, email varchar);
 * _gradle will download and install junit and spark_
 * _the 'gradle run' command will deploy the site to port 4567 by default_
 

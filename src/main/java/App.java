@@ -59,10 +59,10 @@ public class App {
     }, new VelocityTemplateEngine());
 
     post("/stylists/:id", (request, response) -> {
-      String name = request.queryParams("client-name");
+      String name = request.queryParams("name");
       int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
-      String email = request.queryParams("client-email");
-      String phone = request.queryParams("client-phone");
+      String email = request.queryParams("email");
+      String phone = request.queryParams("phone");
       Client client = new Client(name, stylistId, phone, email);
       client.save();
       String url = "/stylists/" + stylistId;
@@ -143,6 +143,34 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/stylists/:stylist_id/clients/:id/update", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params("stylist_id")));
+      Client client = Client.find(Integer.parseInt(request.params("id")));
+      model.put("post-url", "/stylists/" + stylist.getId() + "/clients/" + client.getId() + "/update");
+      model.put("toUpdate", client);
+      model.put("currentStylist", stylist);
+      model.put("stylists", Stylist.all());
+      model.put("template", "templates/client-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists/:stylist_id/clients/:id/update", (request, response) -> {
+      Set<String> allParams = request.queryParams();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params("stylist_id")));
+      Client client = Client.find(Integer.parseInt(request.params("id")));
+      for(String param: allParams){
+        if(!request.queryParams(param).isEmpty()){
+            client.update(param, request.queryParams(param));
+        }
+      }
+      //need to get new stylist id for the redirect
+      client = Client.find(Integer.parseInt(request.params("id")));
+      String url = "/stylists/" + client.getStylistId() + "/clients/" + client.getId();
+      response.redirect(url);
+      return null;
+    });
+
     get("/clients", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("clients", Client.all());
@@ -151,10 +179,10 @@ public class App {
     }, new VelocityTemplateEngine());
 
     post("/clients", (request, response) -> {
-      String name = request.queryParams("client-name");
+      String name = request.queryParams("name");
       int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
-      String email = request.queryParams("client-email");
-      String phone = request.queryParams("client-phone");
+      String email = request.queryParams("email");
+      String phone = request.queryParams("phone");
       Client client = new Client(name, stylistId, email, phone);
       client.save();
       response.redirect("/clients");
