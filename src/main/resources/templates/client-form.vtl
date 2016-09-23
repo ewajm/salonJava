@@ -1,0 +1,20 @@
+<h1>Add new client</h1>
+
+<form action="$post-url" method="post">
+  <div class="form-group">
+    <label for="client-name">Client's name</label>
+    <input type="text" name="client-name" required class="form-control">
+  </div>
+  #if($stylist)
+    <input type="hidden" name="stylist_id" value="$stylist.getId()">
+  #else
+    <div class="form-group">
+      <select name="stylist_id">
+        #foreach($stylist in $stylists)
+          <option value="$stylist.getId()">$stylist.getName()</option>
+        #end
+      </select>
+    </div>
+  #end
+<button type="submit" class="btn btn-primary" name="button"></button>
+</form>

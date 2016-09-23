@@ -1,0 +1,20 @@
+<h1>$stylist.getName()</h1>
+
+<p>Specialty: $stylist.getSpecialty()</p>
+<p>Years experience: $stylist.getExperience()</p>
+<p>Availability: $stylist.getHours()</p>
+<p>Currently accepting new clients: $stylist.isAcceptingClients()</p>
+
+#if($clients.size() > 0)
+  <h4>Client list</h4>
+  <ul>
+  #foreach($client in $clients)
+    <li><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
+  #end
+  </ul>
+#else
+<h3>No clients yet!</h3>
+#end
+
+<h3><a href="/stylists/$stylist.getId()/clients/new">Add client</a></h3>
+<h3><a href="/stylists">Back to all stylists</a></h3>

@@ -1,0 +1,49 @@
+<h1>Add new stylist!</h1>
+
+<form action="/stylists" method="post">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input name="name" type="text" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="specialty">Specialty</label>
+    <input name="specialty" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="experience">Years Experience</label>
+    <input name="experience" type="number" class="form-control" required min="1">
+  </div>
+  <div class="form-group">
+    <label for="days">Days available</label>
+    <div class="checkbox">
+      <label><input name="days" type="checkbox" value="M">Monday</label>
+    </div>
+    <div class="checkbox">
+      <label><input name="days" type="checkbox" value="T">Tuesday</label>
+    </div>
+    <div class="checkbox">
+      <label><input name="days" type="checkbox" value="W">Wednesday</label>
+    </div>
+    <div class="checkbox">
+      <label><input name="days" type="checkbox" value="Th">Thursday</label>
+    </div>
+    <div class="checkbox">
+      <label><input name="days" type="checkbox" value="F">Friday</label>
+    </div>
+    <div class="checkbox">
+      <label><input name="days" type="checkbox" value="Sa">Saturday</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="from-time">From:</label>
+    <input type="time" name="from-time" required>
+  </div>
+  <div class="form-group">
+    <label for="to-time">To:</label>
+    <input type="time" name="to-time" required>
+  </div>
+  <button type="submit" class="btn btn-primary btn-lg" name="button">Add stylist</button>
+</form>
+
+<a href="/stylists">back to stylists</a>
+<a href="/">back to index</a>
