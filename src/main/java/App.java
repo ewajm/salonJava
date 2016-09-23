@@ -92,31 +92,30 @@ public class App {
       return null;
     });
 
-    get("/clients", (request, response) -> {
+    get("/stylists/:id/update", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("clients", Client.all());
-      model.put("template", "templates/clients.vtl");
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params("id")));
+      model.put("toUpdate", stylist);
+      model.put("template", "templates/stylist-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/clients", (request, response) -> {
-      String name = request.queryParams("client-name");
-      int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
-      String email = request.queryParams("client-email");
-      String phone = request.queryParams("client-phone");
-      Client client = new Client(name, stylistId, email, phone);
-      client.save();
-      response.redirect("/clients");
+    post("/stylists/:id/update", (request, response) -> {
+      Set<String> allParams = request.queryParams();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params("id")));
+      for(String param: allParams){
+        if(!request.queryParams(param).isEmpty()){
+          if(param.equals("accepting")){
+            stylist.toggleAccepting();
+          } else {
+            stylist.update(param, request.queryParams(param));
+          }
+        }
+      }
+      String url = "/stylists/" + stylist.getId();
+      response.redirect(url);
       return null;
     });
-
-    get("/clients/new", (request, response) -> {
-      Map<String, Object> model = new HashMap<String, Object>();
-      model.put("post-url", "/clients");
-      model.put("stylists", Stylist.all());
-      model.put("template", "templates/client-form.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
 
     get("/stylists/:id/clients/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -141,6 +140,32 @@ public class App {
       model.put("client", client);
       model.put("stylist", stylist);
       model.put("template", "templates/client.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/clients", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("clients", Client.all());
+      model.put("template", "templates/clients.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/clients", (request, response) -> {
+      String name = request.queryParams("client-name");
+      int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
+      String email = request.queryParams("client-email");
+      String phone = request.queryParams("client-phone");
+      Client client = new Client(name, stylistId, email, phone);
+      client.save();
+      response.redirect("/clients");
+      return null;
+    });
+
+    get("/clients/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("post-url", "/clients");
+      model.put("stylists", Stylist.all());
+      model.put("template", "templates/client-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }

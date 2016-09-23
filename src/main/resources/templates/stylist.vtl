@@ -15,7 +15,9 @@
 #else
 <h3>No clients yet!</h3>
 #end
-
+#if($stylist.isAcceptingClients())
 <h3><a href="/stylists/$stylist.getId()/clients/new">Add client</a></h3>
+#end
+<h3><a href="/stylists/$stylist.getId()/update">Update $stylist.getName()'s details</a>
 <h3><a class="btn btn-danger" href="/stylists/$stylist.getId()/delete">Delete Stylist</a></h3>
 <h3><a href="/stylists">Back to all stylists</a></h3>
