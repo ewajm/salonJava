@@ -5,11 +5,37 @@ import java.util.List;
 import org.sql2o.*;
 
 public class StylistTest{
+  Stylist testStylist;
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  @Before
+  public void setUp(){
+    testStylist = new Stylist("Styles McTesty", "Some hair thing", 1, "MTh 1pm-5pm");
+  }
+
   @Test
   public void methodBeingTested_behaviorBeingTested_ExpectedReturnType() {
-    //assertEquals(expected-output, methodBeingTested(arguments));
+    assertTrue(testStylist instanceof Stylist);
+  }
+
+  @Test
+  public void getName_returnsNameSetByConstructor_String() {
+    assertEquals("Styles McTesty", testStylist.getName());
+  }
+
+  @Test
+  public void getSpecialty_returnsSpecialtySetByConstructor_String() {
+    assertEquals("Some hair thing", testStylist.getSpecialty());
+  }
+
+  @Test
+  public void getHours_returnsHoursSetByConstructor_String() {
+    assertEquals("MTh 1pm-5pm", testStylist.getHours());
+  }
+
+  @Test
+  public void getExperience_returnsExperienceSetByConstructor_int() {
+    assertEquals(1, testStylist.getExperience());
   }
 }
