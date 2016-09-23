@@ -1,0 +1,19 @@
+<h1>Clients</h1>
+<h3><a href="/stylists">See stylists instead</a></h3>
+<div class="client-display">
+#if($success)
+  <h4 class="success">$success added!</h4>
+#end
+#if($clients.size() > 0)
+  #foreach($client in $clients)
+    <div class="client">
+      <a href="clients/$client.getId()">$client.getName()</a>
+    </div>
+  #end
+#else
+  <h2>No clients yet! Hire someone!</h2>
+#end
+</div>
+
+<a href="/clients/new">Add new hire</a><br>
+<a href="/">Back to home</a>

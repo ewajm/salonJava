@@ -5,10 +5,10 @@
 <p>Availability: $stylist.getHours()</p>
 <p>Currently accepting new clients: $stylist.isAcceptingClients()</p>
 
-#if($clients.size() > 0)
+#if($stylist.getClients().size() > 0)
   <h4>Client list</h4>
   <ul>
-  #foreach($client in $clients)
+  #foreach($client in $stylist.getClients())
     <li><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
   #end
   </ul>

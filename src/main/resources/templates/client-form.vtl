@@ -6,7 +6,7 @@
     <input type="text" name="client-name" required class="form-control">
   </div>
   #if($stylist)
-    <input type="hidden" name="stylist_id" value="$stylist.getId()">
+    <input type="hidden" name="stylist_id" value="$stylist">
   #else
     <div class="form-group">
       <select name="stylist_id">
@@ -16,5 +16,5 @@
       </select>
     </div>
   #end
-<button type="submit" class="btn btn-primary" name="button"></button>
+<button type="submit" class="btn btn-primary" name="button">Add Client</button>
 </form>
