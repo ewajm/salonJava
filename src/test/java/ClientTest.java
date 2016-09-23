@@ -53,6 +53,15 @@ public class ClientTest{
     Client testClient2 = new Client("Testina McTest");
     testClient2.save();
     testClient.save();
-    
+    assertTrue(Client.all().contains(testClient));
+    assertTrue(Client.all().contains(testClient2));
+  }
+
+  @Test
+  public void find_returnsClientWithMatchingId_true(){
+    Client testClient2 = new Client("Testina McTest");
+    testClient2.save();
+    testClient.save();
+    assertEquals(Client.find(testClient2.getId()), testClient2);
   }
 }

@@ -1,5 +1,7 @@
 import org.sql2o.*;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Client {
   private int id;
@@ -25,7 +27,7 @@ public class Client {
       return false;
     } else {
       Client clientCompare = (Client) toCompare;
-      return this.name.equals(clientCompare.name);
+      return this.name.equals(clientCompare.name) && this.id == clientCompare.id;
     }
   }
 
@@ -36,5 +38,17 @@ public class Client {
     }
   }
 
-  
+  public static List<Client> all(){
+    String sql = "SELECT id, name FROM clients";
+    try(Connection con = DB.sql2o.open()){
+      return con.createQuery(sql).executeAndFetch(Client.class);
+    }
+  }
+
+  public static Client find(int id){
+    String sql = "SELECT id, name FROM clients WHERE id=:id";
+    try(Connection con = DB.sql2o.open()){
+      return con.createQuery(sql).addParameter("id", id).executeAndFetchFirst(Client.class);
+    }
+  }
 }
