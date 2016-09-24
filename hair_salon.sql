@@ -77,7 +77,9 @@ ALTER SEQUENCE appointments_id_seq OWNED BY appointments.id;
 CREATE TABLE clients (
     id integer NOT NULL,
     name character varying,
-    stylist_id integer
+    stylist_id integer,
+    phone character varying,
+    email character varying
 );
 
 
@@ -181,7 +183,7 @@ SELECT pg_catalog.setval('appointments_id_seq', 1, false);
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: Ewa
 --
 
-COPY clients (id, name, stylist_id) FROM stdin;
+COPY clients (id, name, stylist_id, phone, email) FROM stdin;
 \.
 
 
@@ -189,7 +191,7 @@ COPY clients (id, name, stylist_id) FROM stdin;
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Ewa
 --
 
-SELECT pg_catalog.setval('clients_id_seq', 1, false);
+SELECT pg_catalog.setval('clients_id_seq', 6, true);
 
 
 --
@@ -204,7 +206,7 @@ COPY stylists (id, name, specialty, accepting_clients, experience, hours) FROM s
 -- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Ewa
 --
 
-SELECT pg_catalog.setval('stylists_id_seq', 1, false);
+SELECT pg_catalog.setval('stylists_id_seq', 3, true);
 
 
 --
