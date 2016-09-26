@@ -9,6 +9,9 @@
   </head>
   <body>
     <div class="container">
+      #if($flashMessage)
+        <p id="flash-message">$flashMessage</p>
+      #end
       #if(!$index)
       <h1>Hair! Wow.</h1>
       <div class="link">

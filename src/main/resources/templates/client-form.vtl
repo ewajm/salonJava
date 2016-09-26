@@ -31,6 +31,7 @@
     <input type="hidden" name="stylist_id" value="$stylist">
   #else
     <div class="form-group">
+      <label for="stylist_id">Select new stylist</label>
       <select name="stylist_id">
         #foreach($stylist in $stylists)
           <option value="$stylist.getId()"

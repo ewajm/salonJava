@@ -109,3 +109,11 @@ div.lower-link {
   text-align: center;
   border: 0px;
 }
+
+#flash-message {
+  background-color: #5e503f;
+  color: #f2f4f3;
+  border-radius: 5px;
+  display: block;
+  font-size: large;
+}
