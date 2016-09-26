@@ -9,7 +9,22 @@
   </head>
   <body>
     <div class="container">
-
+      #if(!$index)
+      <h1>Hair! Wow.</h1>
+      <div class="link">
+        <a href="/">Home</a>
+        <a href="/stylists">Stylists</a>
+        <a href="/clients">Clients</a>
+        <a href="/stylists/new">Add stylist</a>
+        #if($stylist)
+          #if($stylist.isAcceptingClients())
+          <a href="/stylists/$stylist.getId()/clients/new">Add client</a>
+          #end
+        #else
+          <a href="/clients/new">Add client</a>
+        #end
+      </div>
+      #end
       #parse( $template )
 
     </div>

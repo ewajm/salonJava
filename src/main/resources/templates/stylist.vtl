@@ -13,13 +13,10 @@
 #else
 <h3>No clients yet!</h3>
 #end
-<div class="link">
+<div class="manage">
 <a class="btn btn-success" href="/stylists/$stylist.getId()/update">Update $stylist.getName()'s details</a>
 <a class="btn btn-danger" href="/stylists/$stylist.getId()/delete">Delete Stylist</a>
 </div>
-<div class="link">
-#if($stylist.isAcceptingClients())
-<a href="/stylists/$stylist.getId()/clients/new">Add client</a>
-#end
-<a href="/stylists">Back to all stylists</a>
+<div class="lower-link link">
+<a href="#top">Top of the Page</a>
 </div>

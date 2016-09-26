@@ -12,6 +12,7 @@ public class App {
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      model.put("index", true);
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -183,7 +184,7 @@ public class App {
       int stylistId = Integer.parseInt(request.queryParams("stylist_id"));
       String email = request.queryParams("email");
       String phone = request.queryParams("phone");
-      Client client = new Client(name, stylistId, email, phone);
+      Client client = new Client(name, stylistId, phone, email);
       client.save();
       response.redirect("/clients");
       return null;
@@ -196,5 +197,23 @@ public class App {
       model.put("template", "templates/client-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    exception(NumberFormatException.class, (exc, req, res) -> {
+      res.status(500);
+      VelocityTemplateEngine engine = new VelocityTemplateEngine();
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/notfound.vtl");
+      String html = engine.render(new ModelAndView(model, layout));
+      res.body(html);
+    });
+
+    exception(NotFoundException.class, (exc, req, res) -> {
+      res.status(500);
+      VelocityTemplateEngine engine = new VelocityTemplateEngine();
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/notfound.vtl");
+      String html = engine.render(new ModelAndView(model, layout));
+      res.body(html);
+    });
   }
 }

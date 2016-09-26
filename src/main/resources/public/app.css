@@ -81,6 +81,9 @@ form {
   border: 2px solid #22333b;
   font-weight: bold;
   font-size: large;
+}
+
+div.form-group, div.checkbox {
   text-align: left;
 }
 
@@ -94,4 +97,15 @@ ul {
 
 a {
   color: darkslateblue;
+}
+
+div.lower-link {
+  width: 40%;
+  margin: 1rem auto;
+}
+
+.manage {
+  background-color: transparent;
+  text-align: center;
+  border: 0px;
 }

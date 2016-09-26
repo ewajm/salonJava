@@ -48,12 +48,12 @@
   <button type="submit" class="btn btn-primary btn-lg">Add Client</button>
   #end
 </form>
-<div class="link">
-#if($toUpdate)
-<a href= "/stylists/$currentStylist.getId()/clients/$toUpdate.getId()">Back to $toUpdate.getName()</a>
-#end
-#if($stylist)
-<a href="/stylists/$stylist.getId()">Back to $stylist.getName()</a>
-#end
-<a href="/clients">Back to clients</a>
+<div class="lower-link link">
+  #if($toUpdate)
+  <a href= "/stylists/$currentStylist.getId()/clients/$toUpdate.getId()">Back to $toUpdate.getName()</a>
+  #end
+  #if($stylist)
+  <a href="/stylists/$stylist">Back to stylist</a>
+  #end
+  <a href="#top">Top of the Page</a>
 <div>
