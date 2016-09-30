@@ -106,7 +106,7 @@ public class StylistTest{
   public void delete_deletesFromTable_true(){
     testStylist.save();
     testStylist.delete();
-    assertEquals(null, Stylist.find(testStylist.getId()));
+    assertEquals(0, Stylist.all().size());
   }
 
   @Test

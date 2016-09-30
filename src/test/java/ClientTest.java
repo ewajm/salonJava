@@ -84,7 +84,7 @@ public class ClientTest{
   public void delete_deletesFromTable_true(){
     testClient.save();
     testClient.delete();
-    assertEquals(null, Client.find(testClient.getId()));
+    assertEquals(0, Client.all().size());
   }
 
   @Test
